@@ -99,19 +99,15 @@ for i in range(0, len(filtered_df), cols_per_row):
     cols = st.columns(cols_per_row)
     for col, (_, row) in zip(cols, row_data.iterrows()):
         with col:
-            proj_img_path = os.path.join("images", str(row["Image"]).strip())
+            proj_img_path = str(row["Image"])
             print(proj_img_path)
-            if not os.path.exists(proj_img_path):
-                proj_img_path = "images/placeholder.png"  # fallback image
-
             # Member Avatars HTML
             member_imgs_html = ""
             member_images = str(row.get("MemberImages", "")).split(",")
             if member_images and member_images[0] != "nan":
                 for img in member_images:
-                    img_path = os.path.join("memberimages", img.strip())
-                    if os.path.exists(img_path):
-                        member_imgs_html += f'<img src="{img_path}" alt="member"/>'
+                    img_path = img
+                    member_imgs_html += f'<img src="{img_path}" alt="member"/>'
 
             # Card HTML
             card_html = f"""
